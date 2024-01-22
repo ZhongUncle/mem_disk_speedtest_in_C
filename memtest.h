@@ -1,7 +1,8 @@
 #include "array4096.h"
 
+
 #define N 1e3
-void diskWriteSpeed(int fd) {
+void memWriteSpeed(int fd) {
     clock_t start = clock();
 
     for (int i=0; i<N; i++) {
@@ -17,7 +18,7 @@ void diskWriteSpeed(int fd) {
 
 #define BUFSIZE 4096*16
 
-void diskReadSpeed(int src, int tar) {
+void memReadSpeed(int src, int tar) {
     int n;
     clock_t start = clock();
 

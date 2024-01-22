@@ -18,7 +18,7 @@ int main(int argc, const char * argv[]) {
     diskReadSpeed(src_fd, tar_fd);
     close(src_fd);
     close(tar_fd);
-    //如果删除的话会写入速度会只有400MB/s，读取速度也有所下降
+    //如果删除缓冲文件的话会写入速度会只有400MB/s，读取速度也有所下降
 //    remove("buffer.txt");
 //    remove("buffertarget.txt");
     //未完成
