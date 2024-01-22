@@ -4,11 +4,9 @@
 #include <string.h>
 #include <stddef.h>
 #include <sys/time.h>
-//#include "array4096.h"
-
 
 typedef struct node {
-    // 1、8 的时候最高，16 的时候比较合适
+    // Speed in 1 or 8 is highest, but 16 is normal case.
     char buffer[8];
     struct node *next;
 } node_t;
@@ -25,7 +23,7 @@ static void init_alloc() {
     if (start_ == NULL) {
         int rc = posix_memalign(&start_, 64, SIMPLE_ALLOCATOR_SIZE);
         if (rc != 0) {
-            printf("Error allocating %ld bytes for allocator!", SIMPLE_ALLOCATOR_SIZE);
+            printf("Error allocating %ld bytes!", SIMPLE_ALLOCATOR_SIZE);
             exit(1);
         }
         memset(start_, 0, SIMPLE_ALLOCATOR_SIZE);
@@ -53,7 +51,6 @@ node_t *new_node(node_t *prev, const char *payload, size_t size) {
         printf("Error allocating %ld bytes for struct node!", sizeof(node_t));
         exit(1);
     }
-    // Copy the payload into the node
     memcpy(n->buffer, payload, size);
     n->next = NULL;
 
@@ -76,7 +73,7 @@ void memSpeedtest() {
     printf("\nMemory Test Starting...\n");
     
     init_alloc();
-    const char text[] = "This is a sample text";
+    const char text[] = "1234567";
     node_t *node0 = new_node(NULL, text, strlen(text));
     node_t * node = node0;
     
