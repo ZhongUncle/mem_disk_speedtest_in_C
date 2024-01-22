@@ -1,10 +1,10 @@
 #!/bin/zsh
 
-cc -O3 main.c
+cc -O3 src/main.c -o mem_disk_speedtest
 
-./a.out
+./mem_disk_speedtest
 
-#rm ./a.out
+#rm ./mem_disk_speedtest
 
-#//如果删除缓冲文件的话会写入速度会只有400MB/s，读取速度也有所下降
+## If deleting buffer files, the write speed is only 400 MB/s, read speed is also down.
 #rm ./buffer.txt buffertarget.txt
