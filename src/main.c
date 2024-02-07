@@ -6,7 +6,7 @@
 #include "memtest.h"
 
 int main(int argc, const char * argv[]) {
-//    diskSpeedtest();
+    diskSpeedtest();
     memSpeedtest();
     
     return 0;
