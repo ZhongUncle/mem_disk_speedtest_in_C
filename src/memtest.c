@@ -90,15 +90,13 @@ void memSpeedtest() {
         node3 = new_node(node3, text, strlen(text));
     }
     clock_gettime(CLOCK_MONOTONIC, &end);
-
     double duration = (double)(end.tv_nsec-start.tv_nsec)/((double) 1e9) + (double)(end.tv_sec-start.tv_sec);
-    
     double speed = 2/duration;
     printf("Write/Copy Speed: %.2f GB/s\n", speed);
 
     struct timespec rstart, rend;
     node->next = node0;
-    node3->next = ndoe2;
+    node3->next = node2;
     clock_gettime(CLOCK_MONOTONIC, &rstart);
     for (int i=0; i < NODES; i++) {
         node = node->next;
