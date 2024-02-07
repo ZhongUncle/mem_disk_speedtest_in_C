@@ -18,4 +18,4 @@ This test will generate 2 files `buffer.txt` and `buffertarget.txt`. After testi
 
 But why I don't delete them in source code or `build.sh`?
 
-Because if deleting these generated files in source code or `build.sh`, the write speed will much less than before.
+Because if deleting these generated files in source code or `build.sh`, the write speed is only 400 MB/s, the read speed is also down.
