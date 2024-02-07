@@ -2,16 +2,17 @@
 
 #define N 1e3
 void diskWriteSpeed(int fd) {
+    int retw = 0;
     struct timespec start, end;
     clock_gettime(CLOCK_MONOTONIC, &start);
 
     for (int i=0; i<N; i++) {
-        write(fd, arr4096, 4096);
+        retw = write(fd, arr4096, 4096);
     }
     
     clock_gettime(CLOCK_MONOTONIC, &end);
     double duration = (double)(end.tv_nsec-start.tv_nsec)/((double) 1e9) + (double)(end.tv_sec-start.tv_sec);
-    float speed = 4096.0/N/duration;
+    float speed = 4096.0*N/duration/1e6;
 
     printf("4K write speed: %.2f MB/s\n", speed);
 }
@@ -31,8 +32,8 @@ void diskReadSpeed(int src, int tar) {
     }
     clock_gettime(CLOCK_MONOTONIC, &end);
     double duration = (double)(end.tv_nsec-start.tv_nsec)/((double) 1e9) + (double)(end.tv_sec-start.tv_sec);
-    float speed = 4096.0/N/duration;
-
+    float speed = 4096.0*N/duration/1e6;
+    
     printf("4K read speed: %.2f MB/s\n", speed);
 }
 
