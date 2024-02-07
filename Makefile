@@ -6,6 +6,7 @@ PRODUCT = mem_disk_speedtest
 all:	$(PRODUCT)
 # Compile and link memtest.o, main.c and disktest.h(auto) by -O3
 $(PRODUCT): memtest.o
+	mkdir $(DST)
 	cc -O3 $(SRC)/main.c $(SRC)/memtest.o -o $(DST)/$(PRODUCT)
 # Compile memtest.c by -O0
 memtest.o:
