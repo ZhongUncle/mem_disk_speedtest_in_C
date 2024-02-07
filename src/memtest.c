@@ -55,42 +55,30 @@ void memSpeedtest() {
     printf("\nMemory Test Starting...\n");
     
     init_alloc();
-    // 16 bytes
+    // 8 bytes
     const char text[] = "123456789012345";
     node_t *node0 = new_node(NULL, text, strlen(text));
     node_t * node = node0;
-    
-    node_t *node2 = new_node(NULL, text, strlen(text));
-    node_t * node3 = node2;
     
     struct timespec start, end;
     clock_gettime(CLOCK_MONOTONIC, &start);
     for (int i=0; i < NODES; i++) {
         node = new_node(node, text, strlen(text));
     }
-    for (int i=0; i < NODES; i++) {
-        node3 = new_node(node3, text, strlen(text));
-    }
     clock_gettime(CLOCK_MONOTONIC, &end);
     double duration = (double)(end.tv_nsec-start.tv_nsec)/((double) 1e9) + (double)(end.tv_sec-start.tv_sec);
-    double speed = 2/duration;
+    double size = 2.4;
+    double speed = size/duration;
     printf("Write/Copy Speed: %.2f GB/s\n", speed);
 
     struct timespec rstart, rend;
-    node->next = node0;
-    node3->next = node2;
     clock_gettime(CLOCK_MONOTONIC, &rstart);
-//    for (int i=0; i < NODES; i++) {
-//        node = node->next;
-//    }
-//    for (int i=0; i < NODES; i++) {
-//        node3 = node3->next;
-//    }
-    memread(node, node3);
+    node->next = node0;
+    memread(node0);
     clock_gettime(CLOCK_MONOTONIC, &rend);
     double rduration = (double)(rend.tv_nsec-rstart.tv_nsec)/((double) 1e9) + (double)(rend.tv_sec-rstart.tv_sec);
-    
-    double rspeed = 2/rduration;
-    printf("Read Speed: %.2f GB/s\n", rspeed);
+    double rsize = 0.8;
+    double rspeed = rsize/rduration;
+    printf("Read Speed: %.2f GB/s\n\n", rspeed);
 }
 

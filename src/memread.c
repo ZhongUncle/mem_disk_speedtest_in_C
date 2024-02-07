@@ -1,11 +1,8 @@
 #include "memtest.h"
 #include "memread.h"
 
-void memread(node_t *node, node_t *node3) {
-    for (int i=0; i < NODES; i++) {
+void memread(node_t *node) {
+    for (int i=1; i < NODES; i++) {
         node = node->next;
-    }
-    for (int i=0; i < NODES; i++) {
-        node3 = node3->next;
     }
 }

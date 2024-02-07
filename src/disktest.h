@@ -14,7 +14,7 @@ void diskWriteSpeed(int fd) {
     double duration = (double)(end.tv_nsec-start.tv_nsec)/((double) 1e9) + (double)(end.tv_sec-start.tv_sec);
     float speed = 4096.0*N/duration/1e6;
 
-    printf("4K write speed: %.2f MB/s\n", speed);
+    printf("Write speed: %.2f MB/s\n", speed);
 }
 
 
@@ -34,7 +34,7 @@ void diskReadSpeed(int src, int tar) {
     double duration = (double)(end.tv_nsec-start.tv_nsec)/((double) 1e9) + (double)(end.tv_sec-start.tv_sec);
     float speed = 4096.0*N/duration/1e6;
     
-    printf("4K read speed: %.2f MB/s\n", speed);
+    printf("Read speed: %.2f MB/s\n", speed);
 }
 
 void diskSpeedtest() {

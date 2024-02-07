@@ -10,7 +10,7 @@ $(PRODUCT): memtest.o
 	cc -O3 $(SRC)/main.c $(SRC)/memtest.o $(SRC)/memread.o -o $(DST)/$(PRODUCT)
 # Compile memtest.c by -O0
 memtest.o: memread.o
-	cc -c -O3 $(SRC)/memtest.c -o $(SRC)/memtest.o
+	cc -c -O0 $(SRC)/memtest.c -o $(SRC)/memtest.o
 memread.o:
 	cc -c -O0 $(SRC)/memread.c -o $(SRC)/memread.o
 # Clean all generated files
