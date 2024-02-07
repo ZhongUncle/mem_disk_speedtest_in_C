@@ -3,16 +3,16 @@
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>
-#include <sys/time.h>
+#include <time.h>
 
 typedef struct node {
     // Speed in 1 or 8 is highest, but 16 is normal case.
-    char buffer[8];
+    char buffer[16];
     struct node *next;
 } node_t;
 
-#define NODES                     1000000
-#define SIMPLE_ALLOCATOR_SIZE     100000000UL
+#define NODES                     10000000
+#define SIMPLE_ALLOCATOR_SIZE     1000000000UL
 
 static void *start_ = NULL;
 static void *cur_ = NULL;
@@ -73,44 +73,43 @@ void memSpeedtest() {
     printf("\nMemory Test Starting...\n");
     
     init_alloc();
-    const char text[] = "1234567";
+    // 16 bytes
+    const char text[] = "123456789012345";
     node_t *node0 = new_node(NULL, text, strlen(text));
     node_t * node = node0;
     
     node_t *node2 = new_node(NULL, text, strlen(text));
     node_t * node3 = node2;
     
-    struct timeval start, end;
-    gettimeofday(&start, NULL);
-    for (int i=1; i < NODES; i++) {
+    struct timespec start, end;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    for (int i=0; i < NODES; i++) {
         node = new_node(node, text, strlen(text));
     }
-    for (int i=1; i < NODES; i++) {
+    for (int i=0; i < NODES; i++) {
         node3 = new_node(node3, text, strlen(text));
     }
-    gettimeofday(&end, NULL);
+    clock_gettime(CLOCK_MONOTONIC, &end);
 
-    double duration = (double)(end.tv_usec - start.tv_usec) / (double)1000000 + (double)(end.tv_sec - start.tv_sec);
+    double duration = (double)(end.tv_nsec-start.tv_nsec)/((double) 1e9) + (double)(end.tv_sec-start.tv_sec);
     
-    double speed = 200/duration/1000;
+    double speed = 2/duration;
     printf("Write/Copy Speed: %.2f GB/s\n", speed);
 
-    struct timeval rstart, rend;
-    gettimeofday(&rstart, NULL);
-    
-    for (int i=1; i < NODES; i++) {
-        node3 = node0;
+    struct timespec rstart, rend;
+    node->next = node0;
+    node3->next = ndoe2;
+    clock_gettime(CLOCK_MONOTONIC, &rstart);
+    for (int i=0; i < NODES; i++) {
         node = node->next;
+    }
+    for (int i=0; i < NODES; i++) {
         node3 = node3->next;
     }
+    clock_gettime(CLOCK_MONOTONIC, &rend);
+    double rduration = (double)(rend.tv_nsec-rstart.tv_nsec)/((double) 1e9) + (double)(rend.tv_sec-rstart.tv_sec);
     
-    gettimeofday(&rend, NULL);
-    double rduration = (double)(rend.tv_usec - rstart.tv_usec) / (double)1000000 + (double)(rend.tv_sec - rstart.tv_sec);
-    
-    double rspeed = 100/duration/1000;
+    double rspeed = 2/rduration;
     printf("Read Speed: %.2f GB/s\n", rspeed);
-    
-    
-    
 }
 
