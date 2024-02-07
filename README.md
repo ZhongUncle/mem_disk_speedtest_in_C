@@ -2,16 +2,14 @@
 Commandline tool to test speed of memory and disk.
 
 ## Usage
-You can use GCC or Clang to compile this tool, but please remember add `-O3` flag. Because we need compiler to optimizate code.
+You need install Clang first.
 
-```
-cc -O3 src/main.c -o mem_disk_speedtest
-```
+
 
 And you can run testing:
 
 ```
-./mem_disk_speedtest
+./bin/mem_disk_speedtest
 ```
  
 This test will generate 2 files `buffer.txt` and `buffertarget.txt`. After testing, you can delete them. 
