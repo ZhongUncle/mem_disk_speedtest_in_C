@@ -1,5 +1,5 @@
-SRC 	= src
-DST 	= bin
+SRC 	= ./src
+DST 	= ./bin
 PRODUCT = mem_disk_speedtest
 
 # Build project
@@ -15,4 +15,4 @@ memtest.o:
 # Clean all generated files
 clean:
 	rm $(SRC)/memtest.o
-	rm $(DST)/$(PRODUCT)
+	rm -rf $(DST)
