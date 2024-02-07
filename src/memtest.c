@@ -1,23 +1,5 @@
-#include <stdint.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <stddef.h>
-#include <time.h>
-
-typedef struct node {
-    // Speed in 1 or 8 is highest, but 16 is normal case.
-    char buffer[16];
-    struct node *next;
-} node_t;
-
-#define NODES                     10000000
-#define SIMPLE_ALLOCATOR_SIZE     1000000000UL
-
-static void *start_ = NULL;
-static void *cur_ = NULL;
-static void *end_ = NULL;
-static size_t counter_ = 0;
+#include "memtest.h"
+#include "memread.h"
 
 static void init_alloc() {
     if (start_ == NULL) {
@@ -98,12 +80,13 @@ void memSpeedtest() {
     node->next = node0;
     node3->next = node2;
     clock_gettime(CLOCK_MONOTONIC, &rstart);
-    for (int i=0; i < NODES; i++) {
-        node = node->next;
-    }
-    for (int i=0; i < NODES; i++) {
-        node3 = node3->next;
-    }
+//    for (int i=0; i < NODES; i++) {
+//        node = node->next;
+//    }
+//    for (int i=0; i < NODES; i++) {
+//        node3 = node3->next;
+//    }
+    memread(node, node3);
     clock_gettime(CLOCK_MONOTONIC, &rend);
     double rduration = (double)(rend.tv_nsec-rstart.tv_nsec)/((double) 1e9) + (double)(rend.tv_sec-rstart.tv_sec);
     

@@ -1,0 +1,7 @@
+
+
+
+
+void diskSpeedtest();
+void memSpeedtest();
+
