@@ -1,5 +1,5 @@
 # mem_disk_speedtest
-Commandline tool to test speed of memory and disk.
+CLI tool to measure speed of memory and disk.
 
 ## Usage
 Just use below command to create directory `bin` and build project:
