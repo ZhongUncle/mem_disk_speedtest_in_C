@@ -1,5 +1,5 @@
 # mem_disk_speedtest
-CLI tool to measure speed of memory and disk using pure C.
+CLI tool to measure speed of memory and disk using pure ~C~C++ (use C++ is easier).
 
 ## Usage
 Just use below command to create directory `bin` and build project:
