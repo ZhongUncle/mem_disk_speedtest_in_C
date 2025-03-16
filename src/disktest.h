@@ -119,6 +119,13 @@ void diskReadSpeed()
     fclose(fd4);
     fclose(fd5);
     fclose(fd6);
+
+    // remove("buffers/buffer1.txt");
+    // remove("buffers/buffer2.txt");
+    // remove("buffers/buffer3.txt");
+    // remove("buffers/buffer4.txt");
+    // remove("buffers/buffer5.txt");
+    // remove("buffers/buffer6.txt");
 }
 
 void diskSpeedtest()
