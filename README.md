@@ -20,6 +20,15 @@ Memory Test Starting...
 Memory bandwidth:	27.53 GB/s
 ```
 
+# Update
+I change logic of code to test speed.
+
+First, I want to use a utilized malloc and file I/O function to get peak bandwidth, it works bad.
+
+So, I use multi-threads to do that, it works better.
 
 # Notices
 It is heavy work and will uses about 24GB memory and disk for test.
+
+# Next
+Maybe change code to full C++ is better.
