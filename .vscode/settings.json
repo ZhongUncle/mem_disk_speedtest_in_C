@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        ".fantomasignore": "ignore",
+        "cstdlib": "cpp",
+        "vector": "cpp"
+    }
+}

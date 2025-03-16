@@ -2,7 +2,6 @@
 #include <time.h>
 #include <thread>
 #include <vector>
-#include <cstdint>
 #include <iostream>
 #include <algorithm>
 
@@ -63,8 +62,8 @@ double estimate_bandwidth(size_t threads_count, const uint8_t* data, size_t data
 
 
 void memSpeedtest() {
-    //测试数据
-    size_t data_volume = 2*1024*1024*1024ULL; // 2 GB
+    //测试数据（4 GB）
+    size_t data_volume = 2*1024*1024*1024ULL;
     std::vector<uint8_t> data(data_volume);
     for (size_t i = 0; i < data_volume; i++) {
         data[i] = 1;
@@ -91,8 +90,10 @@ void memSpeedtest() {
         // printf("%lu %.1f\n", threads, bandwidth);
     }
 
-    auto maxBandwidth = std::max_element(results.begin(),results.end());
-    std::cout << *maxBandwidth << std::endl;
+    auto maxBandwidthIterator = std::max_element(results.begin(),results.end());
+    double maxBandwidth = *maxBandwidthIterator;
+    printf("\nMemory Test Starting...\n");
+    printf("Memory bandwidth:\t%.2f GB/s\n", maxBandwidth);
 }
 
 
