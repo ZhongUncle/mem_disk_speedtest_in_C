@@ -3,7 +3,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "disktest.h"
-#include "memtest.h"
+// change memtest to C++
+#include "memtest.hpp"
 
 int main(int argc, const char * argv[]) {
     diskSpeedtest();
@@ -11,4 +12,3 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
-
